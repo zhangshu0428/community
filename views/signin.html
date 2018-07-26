@@ -46,16 +46,16 @@
             var formData = $(this).serialize();
             console.log(formData)
             //发送请求
-            // $.post('/signin',formData,function (data) {
+            $.post('/signin',formData,function (data) {
 
-            //     console.log(data);
-            //     //判断
-            //     if(data.code != 200) {
-            //         alert(data.message);
-            //     }
+                console.log(data);
+                //判断
+                if(data.code != 200) {
+                    alert(data.message);
+                }
 
-            //     location.href = '/';
-            // })
+                location.href = '/';
+            })
         })
     </script>
 </body>
