@@ -2,6 +2,8 @@
 
 //导入数据库配置
 const db = require('../tools/db_config.js');
+//导入模型，方便调用验证的函数
+const User = require('../models/m_user.js');
 
 exports.showSignIn = (req,res)=>{
 	res.render('signin.html');
@@ -15,10 +17,7 @@ exports.handleSignIn = (req,res)=>{
 	// console.log(req.body);
 
 	//数据库操作
-	
-	const sqlstr = 'SELECT * FROM users WHERE email = ?';
-
-	db.connection.query(sqlstr,body.email,(err,results)=>{
+	User.checkMail(body.email,(err,results)=>{
 
 		if(err) {
 			return res.send({
@@ -45,14 +44,14 @@ exports.handleSignIn = (req,res)=>{
 			})
 
 		}
+
 		//走到这里，说明密码正确//密码正确，进行跳转
 		res.send({
 			code:200,
 			message:'可以登录'
 		})
-		
+
 	})
-
-
+	
 
 }
