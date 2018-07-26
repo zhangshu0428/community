@@ -44,6 +44,8 @@ exports.handleSignIn = (req,res)=>{
 			})
 
 		}
+		req.session.user = results[0];
+		console.log(req.session);
 
 		//走到这里，说明密码正确//密码正确，进行跳转
 		res.send({
