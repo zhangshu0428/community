@@ -1,16 +1,7 @@
 //路由回调函数的处理
-//导入mysql
-const mysql = require('mysql');
 
-//配置数据库
-var connection = mysql.createConnection({
-    host: 'localhost', // 要连接的主机名
-    user: 'root', // 要连接的数据库的用户名
-    password: 'root', // 数据库密码
-    database: 'newssql' // 数据库
-});
-connection.connect();
-
+//导入数据库配置
+const db = require('../tools/db_config.js');
 
 exports.showSignIn = (req,res)=>{
 	res.render('signin.html');
@@ -27,7 +18,7 @@ exports.handleSignIn = (req,res)=>{
 	
 	const sqlstr = 'SELECT * FROM users WHERE email = ?';
 
-	connection.query(sqlstr,body.email,(err,results)=>{
+	db.connection.query(sqlstr,body.email,(err,results)=>{
 
 		if(err) {
 			return res.send({
